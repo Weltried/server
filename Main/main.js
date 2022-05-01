@@ -5,7 +5,7 @@ const httpProxy = require('http-proxy');
 const apiProxy = httpProxy.createProxyServer();
 
 const PORT = 80
-const AI_MODEL_SERVER = 'http://localhost:9099'
+const AI_MODEL_SERVER = 'http://172.17.0.4:9099'
 
 app.use(morgan('dev'));
 
