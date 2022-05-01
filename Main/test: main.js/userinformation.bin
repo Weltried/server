@@ -1,0 +1,1 @@
+curl -X POST 10.177.236.231/userinformation
