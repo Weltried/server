@@ -25,13 +25,13 @@ curl -X POST http://weltried.ga:8080/currentposition
 The main server is developed by Node.js express. It is running on port 80.
 * (POST) http://weltried.ga
 
-* (POST) http://weltried.ga/currentposition [DETAILS](./Main/#currentposition)
+* (POST) http://weltried.ga/currentposition ([DETAILS](./Main/#currentposition))
 
 ## About AI-Model Server
 The AI-Model Server is developed by Python flask. It is running on port 9099.
 * (POST) http://localhost:9099
 
-* (POST) http://localhost:9099/predict [DETAILS](./AI-Model/#predict)
+* (POST) http://localhost:9099/predict ([DETAILS](./AI-Model/#predict))
 
 ## About Database
 
