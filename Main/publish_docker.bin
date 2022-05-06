@@ -1,0 +1,2 @@
+sudo docker build . -t weltried/main
+&& sudo docker run -p 80:80 -d weltried/main --name=main_server

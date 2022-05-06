@@ -1,0 +1,2 @@
+sudo docker build . -t weltried/ai-model
+&& sudo docker run -p 9099:9099 -d weltried/ai-model --name=ai_server
