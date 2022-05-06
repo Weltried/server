@@ -1,0 +1,2 @@
+sudo docker build . -t weltried/testserver
+&& sudo docker run -p 8080:8080 -d weltried/testserver --name=test_server
