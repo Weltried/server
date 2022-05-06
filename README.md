@@ -20,22 +20,19 @@ curl -X POST http://weltried.ga:8080
 ``` bash
 curl -X POST http://weltried.ga:8080/currentposition
 ```
-    - you will get random integer number between 1 and 9.
-    - The range of return value will change after this week, the day this commit ...
+- you will get random integer number between 0 and 8.
 
 ## About Main Server
 The main server is developed by Node.js express. It is running on port 80.
 * (POST) http://weltried.ga
 
-* (POST) http://weltried.ga/userinformation
-* (POST) http://weltried.ga/currentposition
+* (POST) http://weltried.ga/currentposition [DETAILS](./Main/#currentposition)
 
 ## About AI-Model Server
 The AI-Model Server is developed by Python flask. It is running on port 9099.
 * (POST) localhost:9099
 
-* (POST) localhost:9099/predict
-    - If you want more details of this router, go to [LINK](./AI-Model/#predict)
+* (POST) localhost:9099/predict [DETAILS](./AI-Model/#predict)
 
 ## About Database
 
