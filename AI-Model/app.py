@@ -22,8 +22,9 @@ def predict():
 
     # return flask.jsonify(response)
 
-    random_number = str(random.randint(1, 9))
-    return random_number
+    random_number = random.randint(0, 8)
+    data = {'position': random_number}
+    return data
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)

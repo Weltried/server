@@ -8,36 +8,15 @@ app.post('/', (request, response) => {
     console.log('/ sended')
 })
 
-app.post('/userinformation', (request, response) => {
-    console.log('/userinformation requested')
-
-    user = [{
-        phone_number: '010-2672-3889',
-        height: 167,
-        weight: 74
-    }, {
-        phone_number: '010-1234-5678',
-        height: 180,
-        weight: 77
-    }, {
-        phone_number: '010-9876-5432',
-        height: 153,
-        weight: 50
-    }]
-
-    random_number = Math.floor(Math.random() * 3)
-
-    response.send(user[random_number])
-    console.log('/userinformation sended')
-})
-
-
 app.post('/currentposition', (request, response) => {
     console.log('/currentposition requested');
 
-    random_number = Math.floor(Math.random() * 9 + 1)
+    random_number = Math.floor(Math.random() * 9)
+    data = {
+        position: random_number,
+    }
 
-    response.send(random_number.toString())
+    response.send(data);
     console.log('/currentposition sended')
 })
 
