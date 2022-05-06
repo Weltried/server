@@ -17,14 +17,6 @@ app.post('/', (request, response) => {
     console.log('/ sended');
 })
 
-app.post('/userinformation', (request, response) => {
-    console.log('/userinformation requested');
-
-    response.send('it is not developed yet ...');
-
-    console.log('/userinformation sended');
-})
-
 app.post("/currentposition/", (request, response) =>{
     console.log(' /currentposition requested');
 
