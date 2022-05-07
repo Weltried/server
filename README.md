@@ -2,9 +2,9 @@
 Servers is running on Azure instance.
 * weltried.ga
 
-* The test server which just return constant value to client is running independently.
+* A test server which just return constant value to client is running independently.
 
-* A client will only communicate with Main Server, which means server system appears Reverse Proxy.
+* A client will only communicate with a Main Server, which means server system is Reverse Proxy.
     - Only the Main Server communicate with others which are AI-Model Server and Database.
 
 ## About Test Server
@@ -28,10 +28,9 @@ The main server is developed by Node.js express. It is running on port 80.
 * (POST) http://weltried.ga/currentposition ([DETAILS](./Main/#currentposition))
 
 ## About AI-Model Server
-The AI-Model Server is developed by Python flask. It is running on port 9099.
-* (POST) http://localhost:9099
-
-* (POST) http://localhost:9099/predict ([DETAILS](./AI-Model/#predict))
+The AI-Model Server is developed by Python flask.
+<p>you don't have to know routers of this server,
+but if you wish ... [DETAILS](./AI-Model)</p>
 
 ## About Database
-
+The database uses MySQL.
