@@ -2,14 +2,21 @@ const express = require('express')
 const app = express()
 const PORT = 8080
 
+function print_requested(request) {
+    console.log(`${request.ip} requested to ${request.path}`);
+}
+function print_sended(request) {
+    console.log(`response is sended to ${request.ip} who requested to ${request.path}`);
+}
+
 app.post('/', (request, response) => {
-    console.log('/ requested')
+    print_requested(request);
     response.send("You've been requested to Weltried test server.")
-    console.log('/ sended')
+    print_sended(request);
 })
 
 app.post('/currentposition', (request, response) => {
-    console.log('/currentposition requested');
+    print_requested(request);
 
     random_number = Math.floor(Math.random() * 9)
     data = {
@@ -17,7 +24,7 @@ app.post('/currentposition', (request, response) => {
     }
 
     response.send(data);
-    console.log('/currentposition sended')
+    print_sended(request);
 })
 
 app.listen(PORT, () => {

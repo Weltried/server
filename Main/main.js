@@ -7,23 +7,26 @@ const apiProxy = httpProxy.createProxyServer();
 const PORT = 80
 const AI_MODEL_SERVER = 'http://172.17.0.4:9099'
 
+const print = require('./lib/print.js');
+const pool = require('./lib/mysql_config.js');
+
 app.use(morgan('dev'));
 
 app.post('/', (request, response) => {
-    console.log('/ requested');
+    print.requested(request);
 
     response.send("You've been requested to Weltried application !!!");
 
-    console.log('/ sended');
+    print.sended(request);
 })
 
 app.post("/currentposition/", (request, response) =>{
-    console.log(' /currentposition requested');
+    print.requested(request);
 
     request.url = '/predict'
     apiProxy.web(request, response, {target: AI_MODEL_SERVER});
 
-    console.log(' /currentposition is ended');
+    print.sended(request);
 });
 
 app.use((request, response, next) => {
