@@ -17,7 +17,11 @@ app.post('/', (request, response) => {
 
     response.send("You've been requested to Weltried application !!!");
 
+<<<<<<< HEAD
     print.sended(request);
+=======
+    console.log('/ sended');
+>>>>>>> 09ccbfba89930e963146809b2260b4d45c3aab8e
 })
 
 app.post("/currentposition/", (request, response) =>{
