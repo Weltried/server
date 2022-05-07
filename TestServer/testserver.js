@@ -24,11 +24,7 @@ app.post('/currentposition', (request, response) => {
     }
 
     response.send(data);
-<<<<<<< HEAD
     print_sended(request);
-=======
-    console.log('/currentposition sended')
->>>>>>> 09ccbfba89930e963146809b2260b4d45c3aab8e
 })
 
 app.listen(PORT, () => {
