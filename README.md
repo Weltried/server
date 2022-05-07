@@ -30,7 +30,7 @@ The main server is developed by Node.js express. It is running on port 80.
 ## About AI-Model Server
 The AI-Model Server is developed by Python flask.
 <p>you don't have to know routers of this server,
-but if you wish ... [DETAILS](./AI-Model)</p>
+but if you wish ... <a href="./AI-Model">DETAILS</a></p>
 
 ## About Database
 The database uses MySQL.
