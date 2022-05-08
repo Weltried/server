@@ -1,2 +1,3 @@
-sudo docker build . -t weltried/testserver
-&& sudo docker run -p 8080:8080 -d weltried/testserver --name=test_server
+sudo docker build . -t weltried/testserver \
+&& sudo docker container rm --force test_server \
+&& sudo docker run -p 8080:8080 -d --restart unless-stopped --name=test_server weltried/testserver
