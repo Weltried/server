@@ -4,8 +4,8 @@ Servers is running on Azure instance.
 
 * A test server which just return constant value to client is running independently.
 
-* A client will only communicate with a Main Server, which means server system is Reverse Proxy.
-    - Only the Main Server communicate with others which are AI-Model Server and Database.
+* A Main Server will only communicate with a client, which means server system is Reverse Proxy.
+    - Only the Main Server communicates with others which are AI-Model Server and Database.
 
 ## About Test Server
 The test server is developed by Node.js express. It is running on port 8080.
@@ -33,4 +33,6 @@ The AI-Model Server is developed by Python flask.
 but if you wish ... <a href="./AI-Model">DETAILS</a></p>
 
 ## About Database
-The database uses MySQL.
+The database uses MySQL.<br/>
+The database schema is shown below.
+![database schema](./Database/database_schema.jpg)
