@@ -11,6 +11,8 @@ COPY package*.json ./
 #RUN npm install
 # if you are building your code for production
 RUN npm ci --only=productionn
+RUN echo "Asia/Seoul" > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
 
 # Bundle app source
 COPY . .
