@@ -1,0 +1,3 @@
+cd TestServer && source publish_docker.bin \
+&& cd ../Main && source publish_docker.bin \
+&& cd ../AI-Model && source publish_docker.bin
