@@ -1,6 +1,9 @@
 import pickle
 import flask
 import os
+import MySQLdb
+from flask import request
+import mysql_config as database_account
 
 # temp
 import random
@@ -16,15 +19,35 @@ def root():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    ### Model Prediction (below 3 lines)
     # features = flask.request.get_json(force=True)['features']
     # prediction = model.predict([features])
     # response = {'prediction': prediction}
 
-    # return flask.jsonify(response)
-
+    ### Create randon number instead of model prediction.
     random_number = random.randint(0, 8)
     data = {'position': random_number}
-    return data
+
+    #temp = vars(request.json)
+    #print(request.json, flush=True)
+
+    connect = MySQLdb.connect(database_account.host, database_account.id, database_account.password, database_account.database)
+
+    phone_number    = request.json['phone_number']
+    date            = request.json['date']
+    time            = request.json['time']
+    position        = random_number
+
+    cursor = connect.cursor()
+    cursor.execute("insert into posture values (%s, %s, %s, %s)", (phone_number, date, time, position))
+
+    connect.commit()
+
+    connect.close()
+
+    return flask.json.jsonify(data)
+
+    # return flask.jsonify(response)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)

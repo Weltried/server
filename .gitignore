@@ -4,3 +4,4 @@ test:*/*
 venv/*
 
 mysql_config.js
+mysql_config.py
