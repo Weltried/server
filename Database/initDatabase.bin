@@ -1,0 +1,2 @@
+mysql -h172.17.0.5 -uweltried -p < 0* \
+&& mysql -h172.17.0.5 -uweltried -p < 1*
