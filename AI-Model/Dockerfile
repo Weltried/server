@@ -15,6 +15,8 @@ RUN set -e; \
         ;
 
 RUN pip install -r requirements.txt
+RUN echo "Asia/Seoul" > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
 
 COPY . /usr/src/app/weltried_aimodel
 

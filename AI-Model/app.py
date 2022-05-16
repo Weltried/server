@@ -46,6 +46,7 @@ def predict():
     except MySQLdb.Error as err:
         print(err, flush=True)"""
 
+
     return flask.json.jsonify(data)
 
     # return flask.jsonify(response)
