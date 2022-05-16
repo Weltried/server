@@ -3,7 +3,7 @@ It is running on port 9099. if you want to run this server, it recommend that us
 
 ## Routers
 ### /
-* (POST) http://localhost:9099
+* (POST) http://`docker ip`:9099
 ### predict
-* (POST) http://localhost:9099/predict
+* (POST) http://`docker ip`:9099/predict
 

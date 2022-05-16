@@ -28,22 +28,24 @@ def predict():
     random_number = random.randint(0, 8)
     data = {'position': random_number}
 
-    #temp = vars(request.json)
-    #print(request.json, flush=True)
 
-    connect = MySQLdb.connect(database_account.host, database_account.id, database_account.password, database_account.database)
+    """try:
+        connect = MySQLdb.connect(database_account.host, database_account.id, database_account.password, database_account.database)
 
-    phone_number    = request.json['phone_number']
-    date            = request.json['date']
-    time            = request.json['time']
-    position        = random_number
+        phone_number    = request.json['phone_number']
+        date            = request.json['date']
+        time            = request.json['time']
+        position        = random_number
 
-    cursor = connect.cursor()
-    cursor.execute("insert into posture values (%s, %s, %s, %s)", (phone_number, date, time, position))
+        cursor = connect.cursor()
+        cursor.execute("insert into posture values (%s, %s, %s, %s)", (phone_number, date, time, position))
 
-    connect.commit()
+        connect.commit()
 
-    connect.close()
+        connect.close()
+    except MySQLdb.Error as err:
+        print(err, flush=True)"""
+
 
     return flask.json.jsonify(data)
 
