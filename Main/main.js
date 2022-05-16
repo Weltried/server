@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const httpProxy = require('http-proxy');
-const apiProxy = httpProxy.createProxyServer();
+var apiProxy = httpProxy.createProxyServer({});
 
 const PORT = 80
 const AI_MODEL_SERVER = 'http://172.17.0.4:9099'
@@ -35,11 +35,38 @@ app.post('/user', (request, response) => {
 /***
  * Client Story 2
  */
-app.post("/currentposition/", (request, response) =>{
+app.post("/currentposition", (request, response) =>{
     print.requested(request);
 
-    request.url = '/predict'
-    apiProxy.web(request, response, {target: AI_MODEL_SERVER});
+    const phone_number  = request.body.phone_number;
+    const date          = request.body.date;
+    const time          = request.body.time;
+
+    request.url = '/predict';
+
+    apiProxy.web(request, response, {
+        target: AI_MODEL_SERVER,
+        selfHandleResponse: true
+    });
+
+    apiProxy.on('proxyRes', (proxyRes, req, res) => {
+        var body = [];
+        proxyRes.on('data', (chunk) => {
+            body.push(chunk);
+        });
+        proxyRes.on('end', () => {
+            body = Buffer.concat(body).toString();
+            body = JSON.parse(body);
+            const position = body.position;
+
+            pool.query_currentposition(phone_number, date, time, position, (error) => {
+                if(error)
+                    response.send();
+                else
+                    response.send(body);
+            });
+        });
+    });
 
     print.sended(request);
 });
