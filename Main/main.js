@@ -38,9 +38,9 @@ app.post('/user', (request, response) => {
 app.post("/currentposition", (request, response) =>{
     print.requested(request);
 
-    const phone_number  = request.body.phone_number;
-    const date          = request.body.date;
-    const time          = request.body.time;
+    var phone_number  = request.body.phone_number;
+    var date          = request.body.date;
+    var time          = request.body.time;
 
     request.url = '/predict';
 
@@ -50,22 +50,28 @@ app.post("/currentposition", (request, response) =>{
     });
 
     apiProxy.on('proxyRes', (proxyRes, req, res) => {
-        var body = [];
-        proxyRes.on('data', (chunk) => {
-            body.push(chunk);
+        var proxy_response_body = [];
+
+        proxyRes.on('data', (d) => {
+            proxy_response_body.push(d);
         });
+
         proxyRes.on('end', () => {
-            body = Buffer.concat(body).toString();
-            body = JSON.parse(body);
-            const position = body.position;
+            proxy_response_body = Buffer.concat(proxy_response_body).toString();
+            proxy_response_body = JSON.parse(proxy_response_body);
+            // error emit block
+            /*const position = proxy_response_body.position;
 
             pool.query_currentposition(phone_number, date, time, position, (error) => {
                 if(error)
-                    response.send();
+                    res.end();
                 else
-                    response.send(body);
-            });
+                    res.send(proxy_response_body);
+            });*/
+
+            res.send(proxy_response_body);
         });
+
     });
 
     print.sended(request);
