@@ -116,6 +116,45 @@ app.post('/statistic', (request, response) => {
     print.sended(request);
 });
 
+/***
+ * Client Story 3
+ */
+app.post('/measureresult', (request, response) => {
+    print.requested(request);
+
+    const phone_number  = request.body.phone_number;
+    const start_time    = request.body.start_time;
+    const end_time      = request.body.end_time;
+
+    pool.query_measureresult(phone_number, start_time, end_time, (error, results) => {
+        if(error)
+            response.send({"statusCode": 0});
+        else
+            response.send(results);
+    });
+
+    print.sended(request);
+});
+
+/***
+ * Client Story 4
+ */
+app.post('/statistic', (request, response) => {
+    print.requested(request);
+
+    const phone_number  = request.body.phone_number;
+    const date          = request.body.date;
+
+    pool.query_statistic(phone_number, date, (error, results) => {
+        if(error)
+            response.send({"statusCode": 0});
+        else
+            response.send(results);
+    });
+
+    print.sended(request);
+});
+
 app.use((request, response, next) => {
   response.status(404).send('Sorry cant find that!');
 });
