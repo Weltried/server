@@ -16,7 +16,7 @@
 { "position" : INTEGER_VALUE }
 ```
 
-### measureresult
+~~### measureresult~~
 * (POST) http://weltried.ga/measureresult
     - You will get like below array.
 ``` javascript
