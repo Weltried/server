@@ -21,7 +21,7 @@ curl -X POST http://weltried.ga:8080/user
 curl -X POST http://weltried.ga:8080/currentposition
 ```
 
-* (POST) http://weltried.ga:8080/measureresult
+~~* (POST) http://weltried.ga:8080/measureresult~~
 ``` bash
 curl -X POST http://weltried.ga:8080/measureresult
 ```
@@ -37,7 +37,7 @@ The main server is developed by Node.js express. It is running on port 80.
 
 * (POST) http://weltried.ga/currentposition ([DETAILS](./Main/#currentposition))
 
-* (POST) http://weltried.ga/measureresult ([DETAILS](./Main/#measureresult))
+~~* (POST) http://weltried.ga/measureresult ([DETAILS](./Main/#measureresult))~~
 
 * (POST) http://weltried.ga/statistic ([DETAILS](./Main/#statistic))
 
