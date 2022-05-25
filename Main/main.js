@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const httpProxy = require('http-proxy');
-var apiProxy = httpProxy.createProxyServer({});
+var aiProxy = httpProxy.createProxyServer({});
 
 const PORT = 80
 const AI_MODEL_SERVER = 'http://172.17.0.4:9099'
@@ -35,102 +35,41 @@ app.post('/user', (request, response) => {
 /***
  * Client Story 2
  */
+aiProxy.on('proxyRes', (proxyResponse, request, response) => {
+    const phone_number  = request.body.phone_number;
+    const date          = request.body.date;
+    const time          = request.body.time;
+
+    var proxy_response_body = [];
+
+    proxyResponse.on('data', (d) => {
+        proxy_response_body.push(d);
+    });
+
+    proxyResponse.on('end', () => {
+        data = Buffer.concat(proxy_response_body).toString();
+        proxy_response_body = JSON.parse(data);
+
+        const position = proxy_response_body.position;
+
+        pool.query_currentposition(phone_number, date, time, position, (error) => {
+            if(error)
+                response.end();
+            else
+                response.end(data);
+        });
+
+    });
+
+});
 app.post("/currentposition", (request, response) =>{
     print.requested(request);
 
-    var phone_number  = request.body.phone_number;
-    var date          = request.body.date;
-    var time          = request.body.time;
-
     request.url = '/predict';
 
-    apiProxy.web(request, response, {
+    aiProxy.web(request, response, {
         target: AI_MODEL_SERVER,
         selfHandleResponse: true
-    });
-
-    apiProxy.on('proxyRes', (proxyRes, req, res) => {
-        var proxy_response_body = [];
-
-        proxyRes.on('data', (d) => {
-            proxy_response_body.push(d);
-        });
-
-        proxyRes.on('end', () => {
-            proxy_response_body = Buffer.concat(proxy_response_body).toString();
-            proxy_response_body = JSON.parse(proxy_response_body);
-            // error emit block
-            /*const position = proxy_response_body.position;
-
-            pool.query_currentposition(phone_number, date, time, position, (error) => {
-                if(error)
-                    res.end();
-                else
-                    res.send(proxy_response_body);
-            });*/
-
-            res.send(proxy_response_body);
-        });
-
-    });
-
-    print.sended(request);
-});
-
-/***
- * Client Story 3
- */
-app.post('/measureresult', (request, response) => {
-    print.requested(request);
-
-    const phone_number  = request.body.phone_number;
-    const start_time    = request.body.start_time;
-    const end_time      = request.body.end_time;
-
-    pool.query_measureresult(phone_number, start_time, end_time, (error, results) => {
-        if(error)
-            response.send({"statusCode": 0});
-        else
-            response.send(results);
-    });
-
-    print.sended(request);
-});
-
-/***
- * Client Story 4
- */
-app.post('/statistic', (request, response) => {
-    print.requested(request);
-
-    const phone_number  = request.body.phone_number;
-    const date          = request.body.date;
-
-    pool.query_statistic(phone_number, date, (error, results) => {
-        if(error)
-            response.send({"statusCode": 0});
-        else
-            response.send(results);
-    });
-
-    print.sended(request);
-});
-
-/***
- * Client Story 3
- */
-app.post('/measureresult', (request, response) => {
-    print.requested(request);
-
-    const phone_number  = request.body.phone_number;
-    const start_time    = request.body.start_time;
-    const end_time      = request.body.end_time;
-
-    pool.query_measureresult(phone_number, start_time, end_time, (error, results) => {
-        if(error)
-            response.send({"statusCode": 0});
-        else
-            response.send(results);
     });
 
     print.sended(request);
