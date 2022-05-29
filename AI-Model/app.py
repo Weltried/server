@@ -1,15 +1,11 @@
-import pickle
 import flask
 import os
-import MySQLdb
-
-# temp
-import random
+import joblib
 
 app = flask.Flask(__name__)
 port = int(os.getenv("PORT", 9099))
 
-# model = pickle.load(open("model.pkl", "rb"))
+model = joblib.load('./ai_model.pkl')
 
 @app.route('/', methods=['POST'])
 def root():
@@ -17,19 +13,16 @@ def root():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    ### Model Prediction (below 3 lines)
-    # features = flask.request.get_json(force=True)['features']
-    # prediction = model.predict([features])
-    # response = {'prediction': prediction}
+    data = flask.request.get_json(force=True)
+    x = data['x']
+    y = data['y']
+    z = data['z']
+    features = [x, y, z]
 
-    # return flask.jsonify(response)
+    prediction = model.predict([features])[0]
 
-
-    ### Create randon number instead of model prediction.
-    random_number = random.randint(0, 8)
-    data = {'position': random_number}
-
-    return flask.json.jsonify(data)
+    response = {'position': int(prediction)}
+    return flask.jsonify(response)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
