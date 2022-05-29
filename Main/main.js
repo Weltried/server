@@ -69,7 +69,7 @@ aiProxy.on('proxyRes', (proxyResponse, request, response) => {
         });
 
     });
-
+  
 });
 app.post("/currentposition", (request, response) =>{
     print.requested(request);
