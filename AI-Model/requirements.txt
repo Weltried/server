@@ -1,2 +1,2 @@
 Flask==2.1.2
-mysqlclient==2.1.0
+lightgbm==3.3.2
