@@ -35,6 +35,15 @@ app.post('/user', (request, response) => {
 /***
  * Client Story 2
  */
+aiProxy.on('proxyReq', (proxyRequest, request, response) => {
+    const bodyData = JSON.stringify(request.body);
+
+    proxyRequest.setHeader('Content-Type', 'application/json');
+    proxyRequest.setHeader('Content-Length', Buffer.byteLength(bodyData));
+
+    proxyRequest.path = '/predict';
+    proxyRequest.write(bodyData);
+});
 aiProxy.on('proxyRes', (proxyResponse, request, response) => {
     const phone_number  = request.body.phone_number;
     const date          = request.body.date;
@@ -60,12 +69,10 @@ aiProxy.on('proxyRes', (proxyResponse, request, response) => {
         });
 
     });
-
+  
 });
 app.post("/currentposition", (request, response) =>{
     print.requested(request);
-
-    request.url = '/predict';
 
     aiProxy.web(request, response, {
         target: AI_MODEL_SERVER,
