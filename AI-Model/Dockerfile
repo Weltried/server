@@ -3,20 +3,10 @@ FROM python:3.8-alpine
 WORKDIR /usr/src/app/weltried_aimodel
 
 COPY ./requirements.txt /usr/src/app/weltried_aimodel
-
-RUN set -e; \
-        apk add --no-cache --virtual .build-deps \
-                gcc \
-                libc-dev \
-                linux-headers \
-                mariadb-dev \
-                python3-dev \
-                postgresql-dev \
-        ;
-
+RUN apk update \
+    && apk add make automake gcc g++ subversion python3-dev gfortran \
+    && apk add --update-cache --no-cache lapack-dev cmake
 RUN pip install -r requirements.txt
-RUN echo "Asia/Seoul" > /etc/timezone
-RUN dpkg-reconfigure -f noninteractive tzdata
 
 COPY . /usr/src/app/weltried_aimodel
 
