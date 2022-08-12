@@ -1,15 +1,17 @@
 # server
-Servers is running on Azure instance.
-* weltried.ga
+~~Servers are running on Azure instance.~~
+**The Server is not running any longer.**
 
-* A test server which just return constant value to client is running independently.
+~~* weltried.ga~~
 
-* A Main Server will only communicate with a client, which means server system is Reverse Proxy.
+* A test server which just returns constant value to client is running independently.
+
+* A Main Server is a only way that a client can communicate with, which means that server system is Reverse Proxy.
     - Only the Main Server communicates with others which are AI-Model Server and Database.
 
 ## About Test Server
-The test server is developed by Node.js express. It is running on port 8080.
-* You can test server using `curl` command.
+The test server is developed by Node.js express. ~~It is running on port 8080.~~
+* You can test the server using `curl` command.
 
 * (POST) http://weltried.ga:8080/user
 ``` bash
@@ -32,7 +34,7 @@ curl -X POST http://weltried.ga:8080/statistic
 ```
 
 ## About Main Server
-The main server is developed by Node.js express. It is running on port 80.
+The main server is developed by Node.js express. ~~It is running on port 80.~~
 * (POST) http://weltried.ga/user ([DETAILS](./Main/#user))
 
 * (POST) http://weltried.ga/currentposition ([DETAILS](./Main/#currentposition))
